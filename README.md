@@ -24,7 +24,7 @@ There are terminal coding agents (they only write code) and chat clients (they o
 
 DeepSeek V4 is not bolted on — it is the core: 1M context window, max reasoning effort, streaming thinking-mode display, and context-cache hit metrics you can actually see.
 
-> This repository is DeepDepCat's product homepage, release channel and community hub. The desktop app source code is developed privately; the open-sourced components live here too (see [Open source](#open-source)). Issues, feature requests and feedback are very welcome.
+> This repository is DeepDepCat's product homepage, release channel and community hub. The desktop app itself is developed privately — the open-sourced component (WPS Office MCP server) lives in `depwork-mcp/`. Issues, feature requests and feedback are very welcome.
 
 ## Screenshots
 
