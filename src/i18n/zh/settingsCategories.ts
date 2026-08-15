@@ -1,0 +1,17 @@
+export const settingsCategories = {
+  appearance: "外观与行为",
+  models: "模型",
+  vision: "视觉模型",
+  limits: "执行限制",
+  network: "网络与数据",
+  memory: "记忆管理",
+  permissions: "权限",
+  agents: "智能体定义",
+  skills: "技能与记忆",
+  hooks: "钩子",
+  mcpServers: "MCP 服务器",
+  connectors: "连接器",
+  plugins: "插件",
+  usage: "使用统计",
+  about: "关于",
+};

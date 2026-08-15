@@ -1,0 +1,15 @@
+export const layout = {
+  codeMode: "DeepDepCat — 代码",
+  depworkMode: "DeepDepCat — 文档",
+  productCode: "Code",
+  productDepwork: "Depwork",
+  productCodeDesc: "编码助手",
+  productDepworkDesc: "文档办公",
+  productStreaming: "该产品有会话正在运行",
+  todoBadge: "当前会话有待办任务进行中",
+  saveConfig: "保存配置",
+  saved: "已保存",
+  saving: "保存中…",
+  reset: "重置",
+  settings: "设置",
+};

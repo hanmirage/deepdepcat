@@ -1,0 +1,17 @@
+export const permission = {
+  title: "需要确认",
+  viewArgs: "查看参数",
+  collapseArgs: "收起参数",
+  deny: "拒绝",
+  alwaysAllow: "总是允许",
+  allow: "允许",
+  sensitiveFile: "正在修改敏感文件（密钥/凭据类）——批准前请确认变更内容",
+  autoReviewDeniedTitle: "Auto-Review 拒绝了操作",
+  autoReviewAllowOnce: "仍要允许一次",
+  alwaysWillRemember: "「始终允许」将记住",
+  alwaysExact: "仅本次范围",
+  alwaysWholeTool: "整个工具",
+  cancel: "取消",
+  denyReasonPlaceholder: "为什么拒绝？（可选，将反馈给 agent）",
+  confirmDeny: "确认拒绝",
+};

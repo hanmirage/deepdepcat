@@ -1,0 +1,932 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════
+   DeepDepCat — Global Styles & CSS Variables
+   ═══════════════════════════════════════════════════════════ */
+
+@layer base {
+  :root {
+    /* ── Light Mode (Paper-cut aesthetic) ───────────────────── */
+    --background: 0 0% 96%;          /* #F5F5F5 — desk surface */
+    --foreground: 0 0% 3.9%;         /* near-black */
+    --card: 0 0% 100%;               /* #FFFFFF — paper white */
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 262 70% 58%;           /* #7C6BE8 blue-violet — matches cat icon palette */
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 262 70% 58%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 100%;
+    --ring: 262 70% 58%;
+    --radius: 0.5rem;                /* 8px — crisp paper corners */
+
+    /* ── Paper shadow hierarchy ────────────────────────────── */
+    --shadow-paper-sm:
+      0 1px 2px hsl(0 0% 0% / 0.04),
+      0 1px 1px hsl(0 0% 0% / 0.06);
+    --shadow-paper-md:
+      0 2px 4px hsl(0 0% 0% / 0.04),
+      0 4px 8px hsl(0 0% 0% / 0.08);
+    --shadow-paper-lg:
+      0 4px 8px hsl(0 0% 0% / 0.04),
+      0 8px 16px hsl(0 0% 0% / 0.1);
+    --shadow-paper-xl:
+      0 8px 16px hsl(0 0% 0% / 0.06),
+      0 16px 32px hsl(0 0% 0% / 0.12);
+
+    /* ── Custom: Sidebar ───────────────────────────────────── */
+    --sidebar-bg: 0 0% 98%;           /* #FAFAFA */
+    --sidebar-border: 0 0% 90%;
+
+    /* ── Custom: Status colors ─────────────────────────────── */
+    --status-idle: 0 0% 45%;
+    --status-running: 262 70% 58%;    /* matches primary */
+    --status-connecting: 48 89% 50%;  /* amber */
+
+    /* ── Custom: Title bar ─────────────────────────────────── */
+    --titlebar-bg: 0 0% 98%;
+    --titlebar-border: 0 0% 90%;
+
+    /* ── Custom: macOS traffic light colors ─────────────────── */
+    --mac-close: 0 100% 68%;       /* #FF5F57 */
+    --mac-minimize: 41 99% 59%;    /* #FEBC2E */
+    --mac-maximize: 120 100% 48%; /* #28C840 */
+
+    /* ── Code palette — ONE source of truth for syntax colors, shared by
+       the streaming tokens (code-tok-*), the completed hljs pass, and the
+       Shiki worker (mirrored as hex in highlight.worker.ts). ── */
+    --code-keyword: 262 65% 52%;   /* purple — primary family */
+    --code-string: 145 55% 36%;    /* green */
+    --code-number: 28 80% 42%;     /* amber */
+    --code-comment: var(--muted-foreground);
+    --code-tag: 212 75% 42%;       /* blue */
+    --code-attr: 262 65% 52%;      /* purple */
+    --code-atrule: 262 65% 52%;    /* purple */
+    --code-prop: 212 70% 40%;      /* blue */
+    --code-function: 210 60% 40%;  /* deep blue, bold */
+    --code-file: 185 70% 38%;      /* teal — clickable file reference */
+  }
+
+  .dark {
+    /* ── Dark Mode (Deep paper-cut) ────────────────────────── */
+    --background: 0 0% 8%;           /* #141414 — deep desk */
+    --foreground: 0 0% 98%;
+    --card: 0 0% 12%;                /* #1E1E1E — dark paper */
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 13%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 262 70% 60%;           /* blue-violet, slightly brighter on dark */
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 262 70% 60%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 18%;
+    --input: 0 0% 12%;
+    --ring: 262 70% 60%;
+
+    /* ── Paper shadow hierarchy (dark) ─────────────────────── */
+    --shadow-paper-sm:
+      0 1px 2px hsl(0 0% 0% / 0.2),
+      0 1px 1px hsl(0 0% 0% / 0.3);
+    --shadow-paper-md:
+      0 2px 4px hsl(0 0% 0% / 0.2),
+      0 4px 8px hsl(0 0% 0% / 0.4);
+    --shadow-paper-lg:
+      0 4px 8px hsl(0 0% 0% / 0.3),
+      0 8px 16px hsl(0 0% 0% / 0.5);
+    --shadow-paper-xl:
+      0 8px 16px hsl(0 0% 0% / 0.4),
+      0 16px 32px hsl(0 0% 0% / 0.6);
+
+    --sidebar-bg: 0 0% 10%;
+    --sidebar-border: 0 0% 18%;
+
+    --status-idle: 0 0% 45%;
+    --status-running: 262 70% 60%;
+    --status-connecting: 48 89% 50%;
+
+    --titlebar-bg: 0 0% 10%;
+    --titlebar-border: 0 0% 18%;
+
+    --mac-close: 0 100% 68%;
+    --mac-minimize: 41 99% 59%;
+    --mac-maximize: 120 100% 48%;
+
+    /* ── Code palette (dark) — brighter, same hue family as light. ── */
+    --code-keyword: 262 70% 74%;
+    --code-string: 145 60% 62%;
+    --code-number: 32 90% 64%;
+    --code-comment: var(--muted-foreground);
+    --code-tag: 212 85% 68%;
+    --code-attr: 262 70% 74%;
+    --code-atrule: 262 70% 74%;
+    --code-prop: 212 80% 66%;
+    --code-function: 210 80% 70%;
+    --code-file: 185 75% 62%;      /* teal — clickable file reference */
+  }
+}
+
+/* ── UI accent presets — the app's primary hue, selected in Settings →
+   Appearance. Defaults are the violet values above; each preset overrides
+   --primary/--accent/--ring/--status-running (all hsl triplets, so every
+   `hsl(var(--primary))` usage follows). Code palette (--code-*) stays
+   independent — keyword purple is a syntax-highlighting convention. ── */
+:root[data-accent="blue"] {
+  --primary: 221 83% 53%;
+  --accent: 221 83% 53%;
+  --ring: 221 83% 53%;
+  --status-running: 221 83% 53%;
+}
+:root[data-accent="teal"] {
+  --primary: 180 70% 42%;
+  --accent: 180 70% 42%;
+  --ring: 180 70% 42%;
+  --status-running: 180 70% 42%;
+}
+:root[data-accent="green"] {
+  --primary: 145 60% 40%;
+  --accent: 145 60% 40%;
+  --ring: 145 60% 40%;
+  --status-running: 145 60% 40%;
+}
+:root[data-accent="amber"] {
+  --primary: 32 85% 50%;
+  --accent: 32 85% 50%;
+  --ring: 32 85% 50%;
+  --status-running: 32 85% 50%;
+}
+:root[data-accent="rose"] {
+  --primary: 335 70% 50%;
+  --accent: 335 70% 50%;
+  --ring: 335 70% 50%;
+  --status-running: 335 70% 50%;
+}
+
+.dark[data-accent="blue"] {
+  --primary: 217 91% 60%;
+  --accent: 217 91% 60%;
+  --ring: 217 91% 60%;
+  --status-running: 217 91% 60%;
+}
+.dark[data-accent="teal"] {
+  --primary: 176 70% 50%;
+  --accent: 176 70% 50%;
+  --ring: 176 70% 50%;
+  --status-running: 176 70% 50%;
+}
+.dark[data-accent="green"] {
+  --primary: 140 60% 55%;
+  --accent: 140 60% 55%;
+  --ring: 140 60% 55%;
+  --status-running: 140 60% 55%;
+}
+.dark[data-accent="amber"] {
+  --primary: 35 85% 60%;
+  --accent: 35 85% 60%;
+  --ring: 35 85% 60%;
+  --status-running: 35 85% 60%;
+}
+.dark[data-accent="rose"] {
+  --primary: 330 70% 62%;
+  --accent: 330 70% 62%;
+  --ring: 330 70% 62%;
+  --status-running: 330 70% 62%;
+}
+
+/* ── Base element styles ───────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+  }
+}
+
+/* ── Custom scrollbar (thin, subtle) ──────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* ── Paper-cut component layer ───────────────────────────── */
+@layer components {
+  /* A panel that looks like a cut piece of paper */
+  .paper-card {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-paper-md);
+    transition: box-shadow 0.2s ease;
+  }
+  .paper-card:hover {
+    box-shadow: var(--shadow-paper-lg);
+  }
+
+  /* Flat paper surface without hover effect */
+  .paper-surface {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-paper-sm);
+  }
+
+  /* ── Decision cards — the permission / ask-user / MCP / plan request
+     family. Paper-cut language: a crisp sheet of paper on the desk with a
+     layered shadow. No glass, no gradient accents — the paper itself is
+     the emphasis; state is carried by the blue-violet icon stamp. */
+  .decision-card {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border) / 0.75);
+    border-radius: calc(var(--radius) + 4px);
+    box-shadow: var(--shadow-paper-xl);
+  }
+
+  /* Action strip at the bottom of a decision card — a quiet second sheet
+     of paper under the top one. */
+  .decision-card-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-top: 1px solid hsl(var(--border) / 0.6);
+    background: hsl(var(--muted) / 0.35);
+    padding: 0.625rem 0.875rem;
+  }
+
+  /* Blue-violet paper stamp for a card's leading icon. */
+  .decision-icon {
+    display: flex;
+    height: 1.75rem;
+    width: 1.75rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: calc(var(--radius) - 2px);
+    background: hsl(var(--primary) / 0.1);
+    color: hsl(var(--primary));
+  }
+
+  /* Drag handle for resizable sidebar.
+     Sits entirely OUTSIDE the sidebar's right edge (right: -6px) so it never
+     covers content like the session delete button at the far right of a row.
+     Hit area (9px) is wider than the visible strip for easier grabbing;
+     pointer capture keeps the drag alive outside the element/window. */
+  .drag-handle {
+    position: absolute;
+    top: 0;
+    right: -6px;
+    bottom: 0;
+    width: 9px;
+    cursor: col-resize;
+    background: transparent;
+    transition: background 0.15s ease;
+    z-index: 10;
+  }
+  /* The handle stays visually empty — only a thin primary rule appears at
+     the split on hover/drag. No full-width tint band (a 30% primary wash
+     over the 9px column reads as a glowing blue stripe). */
+  .drag-handle::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2px;
+    height: 32px;
+    border-radius: 1px;
+    background: hsl(var(--border));
+    opacity: 0;
+    transition: opacity 0.15s ease, background 0.15s ease;
+  }
+  .drag-handle:hover::after,
+  .drag-handle:active::after {
+    opacity: 1;
+    background: hsl(var(--primary) / 0.6);
+  }
+}
+
+/* ── Utility classes ──────────────────────────────────────── */
+.no-select {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Radix ScrollArea viewport wraps its children in an inline-styled
+   `display: table; min-width: 100%` div. A table sizes itself to the
+   content's min-content width, so an unbreakable long string (e.g. a very
+   long session title) inflates the wrapper past the sidebar and defeats
+   every `truncate`/`min-w-0` chain inside it — the row's click area then
+   stretches over the main panel. `max-width` can't clamp a table (its
+   min-content is a hard floor), so force block layout: the wrapper then
+   takes the viewport width and over-wide content is clipped by the
+   viewport's existing overflow-x: hidden. */
+[data-radix-scroll-area-viewport] > div {
+  display: block !important;
+}
+
+/* Tauri drag region for custom title bar */
+[data-tauri-drag-region] {
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Custom Keyframe Animations
+   Only @keyframes go here — no component-specific selectors.
+   ═══════════════════════════════════════════════════════════ */
+
+/* Shimmer: sweeps a light gradient left-to-right across tool call pill */
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.animate-shimmer {
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* Glow-pulse: pulsing box-shadow for running tool call status dot */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 4px hsl(var(--primary)); }
+  50%      { box-shadow: 0 0 12px hsl(var(--primary)); }
+}
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* Setup-pulse: attention ring for the no-model notice (Enter without model) */
+@keyframes setup-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0.4); border-color: hsl(var(--primary) / 0.6); }
+  50%      { box-shadow: 0 0 0 4px hsl(var(--primary) / 0.15); border-color: hsl(var(--primary) / 0.25); }
+}
+
+/* Thinking dots: sequential fade for the "Thinking..." indicator */
+@keyframes thinking-bounce {
+  0%, 80%, 100% { opacity: 0.2; }
+  40% { opacity: 1; }
+}
+.animate-thinking-dot {
+  animation: thinking-bounce 1.4s ease-in-out infinite;
+}
+.animate-thinking-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.animate-thinking-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Syntax Highlighting (rehype-highlight / hljs classes)
+   ═══════════════════════════════════════════════════════════ */
+
+/* One palette (--code-*) drives light AND dark — the variables flip with
+   .dark, so no per-theme overrides are needed. Mirrors the streaming
+   code-tok-* tokens and the Shiki worker for visual consistency. */
+.hljs {
+  color: hsl(var(--foreground));
+  background: transparent;
+}
+.hljs-comment,
+.hljs-quote {
+  color: hsl(var(--code-comment));
+  font-style: italic;
+}
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-meta-keyword {
+  color: hsl(var(--code-keyword));
+}
+.hljs-string,
+.hljs-regexp,
+.hljs-addition {
+  color: hsl(var(--code-string));
+}
+.hljs-number,
+.hljs-symbol,
+.hljs-bullet {
+  color: hsl(var(--code-number));
+}
+.hljs-title,
+.hljs-name,
+.hljs-section,
+.hljs-built_in,
+.hljs-type {
+  color: hsl(var(--code-tag));
+}
+.hljs-attr,
+.hljs-attribute,
+.hljs-variable,
+.hljs-template-variable {
+  color: hsl(var(--code-attr));
+}
+.hljs-function .hljs-title,
+.hljs-title.function_ {
+  color: hsl(var(--code-function));
+  font-weight: 600;
+}
+.hljs-params {
+  color: hsl(var(--foreground) / 0.6);
+}
+.hljs-meta,
+.hljs-operator,
+.hljs-property {
+  color: hsl(var(--foreground) / 0.55);
+}
+.hljs-deletion {
+  color: hsl(var(--destructive));
+}
+.hljs-link {
+  color: hsl(var(--code-tag));
+  text-decoration: underline;
+}
+.hljs-emphasis {
+  font-style: italic;
+}
+.hljs-strong {
+  font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════════════════════
+    Streaming Animations — Advanced Stream System
+    ═══════════════════════════════════════════════════════════ */
+
+/* ── Advanced Stream System ─────────────────────────────────
+   Design principles:
+   1. Checkpoint-based rendering: frozen content never re-renders
+   2. Tail-only updates: only the unfrozen portion updates
+   3. Zero word-level animation: no per-word animations (performance)
+   4. Simple fade-in for new content
+   ── */
+
+/* Stream container */
+.stream-container {
+  position: relative;
+}
+
+/* Frozen content — rendered once, never updates */
+.stream-frozen-content {
+  /* Content is inserted via innerHTML */
+}
+
+/* Tail content — receives updates */
+.stream-tail-content {
+  /* Content is inserted via innerHTML */
+}
+
+/* New content fade-in */
+@keyframes stream-content-fade-in {
+  from {
+    opacity: 0.7;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.stream-tail-content > *:last-child {
+  animation: stream-content-fade-in 150ms ease-out;
+}
+
+/* ── Streaming cursor — thin gradient caret, soft breathing (Claude-style,
+   "alive but never blinking hard"). ───────────────────────── */
+.streaming-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  border-radius: 1px;
+  background: linear-gradient(
+    to bottom,
+    hsl(var(--primary) / 0.9),
+    hsl(var(--primary) / 0.55)
+  );
+  box-shadow: 0 0 3px hsl(var(--primary) / 0.35);
+  animation: stream-cursor-breath 1.15s ease-in-out infinite;
+  will-change: opacity;
+}
+
+@keyframes stream-cursor-breath {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 1; }
+}
+
+/* ── Stall breathing — the stream went quiet (model thinking, tool
+   running) but is still alive: slower, deeper, dimmer. ────────── */
+.streaming-cursor-stalled {
+  animation: stream-cursor-stall 2.8s ease-in-out infinite;
+  opacity: 0.2;
+}
+
+@keyframes stream-cursor-stall {
+  0%, 100% { opacity: 0.12; transform: scaleY(0.55); }
+  50%      { opacity: 0.45; transform: scaleY(1); }
+}
+
+/* ── Content block enter animation ───────────────────────── */
+.stream-text-enter {
+  animation: stream-fade-in 0.2s ease-out forwards;
+}
+
+@keyframes stream-fade-in {
+  /* 0.9 not 0.6 — the fade only masks the renderer swap, so a near-invisible
+     dip hides it without dimming text the user is already reading. */
+  from { opacity: 0.9; }
+  to   { opacity: 1; }
+}
+
+/* ── Stream settle — a completed block's soft arrival after the reveal
+   catches up (block-level only; never per-char/per-line, the streaming
+   path renders at ~15fps). Complements stream-text-enter, gentler. ── */
+.stream-text-settle {
+  animation: stream-settle-in 0.22s ease-out forwards;
+}
+
+@keyframes stream-settle-in {
+  from { opacity: 0.82; }
+  to   { opacity: 1; }
+}
+
+/* ── Paper settle — a card-like block "lands" on the page like a sheet of
+   paper: a soft drop with a brief shadow press that relaxes flat. Applies
+   to card surfaces that appear on completion (code blocks, the end-of-turn
+   change summary) — the paper-cut counterpart to the enter fades. Text
+   paragraphs deliberately stay on the subtle fade: per-paragraph motion
+   would read as noise in a long reply. Composited-only (opacity, transform,
+   box-shadow) — never layout. ── */
+@keyframes paper-settle {
+  0%   { opacity: 0.5; transform: translateY(5px); box-shadow: 0 0 0 hsl(0 0% 0% / 0); }
+  60%  { opacity: 1;   transform: translateY(0);   box-shadow: 0 6px 16px hsl(0 0% 0% / 0.14); }
+  100% { opacity: 1;   transform: translateY(0);   box-shadow: 0 0 0 hsl(0 0% 0% / 0); }
+}
+.paper-settle {
+  animation: paper-settle 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Reasoning dots — refined "thinking" indicator: dots gently breathe
+   from dim to lit, staggered, instead of the bouncy opacity bounce. ── */
+.reasoning-dot {
+  display: inline-block;
+  width: 3px;
+  height: 3px;
+  border-radius: 9999px;
+  background: hsl(var(--primary) / 0.7);
+  animation: reasoning-dot-breathe 1.5s ease-in-out infinite;
+}
+
+.reasoning-dot:nth-child(2) { animation-delay: 0.2s; }
+.reasoning-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes reasoning-dot-breathe {
+  0%, 100% { opacity: 0.18; transform: scale(0.75); }
+  50%      { opacity: 0.95; transform: scale(1); }
+}
+
+/* ── Running tool accent — the vertical primary bar that marks the
+   currently-executing tool row (left edge, soft glow). ── */
+.tool-running-accent {
+  border-left: 2px solid hsl(var(--primary));
+  box-shadow: inset 3px 0 6px -4px hsl(var(--primary) / 0.5);
+}
+
+/* ── Streaming code highlight — ONE palette (--code-*), shared with the
+   completed hljs pass and the Shiki worker. ─────────────────────── */
+.code-tok-keyword { color: hsl(var(--code-keyword)); }
+.code-tok-string  { color: hsl(var(--code-string)); }
+.code-tok-number  { color: hsl(var(--code-number)); }
+.code-tok-comment { color: hsl(var(--code-comment)); font-style: italic; opacity: 0.8; }
+.code-tok-tag     { color: hsl(var(--code-tag)); }
+.code-tok-attr    { color: hsl(var(--code-attr)); }
+.code-tok-atrule  { color: hsl(var(--code-atrule)); }
+.code-tok-prop    { color: hsl(var(--code-prop)); }
+/* File references inside prose (not code blocks) — the same teal family as
+   code, but sitting on a muted chip so it reads as a clickable target. */
+.code-tok-file     { color: hsl(var(--code-file)); }
+
+/* ── Accessibility: respect prefers-reduced-motion ───────── */
+@media (prefers-reduced-motion: reduce) {
+  .streaming-cursor {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .streaming-cursor-stalled {
+    animation: none !important;
+    opacity: 0.4 !important;
+  }
+
+  .stream-text-enter {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .tool-card-enter {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .tool-expand-enter {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .text-shimmer {
+    animation: none !important;
+    background: none !important;
+    color: inherit !important;
+  }
+
+  .animate-thinking-dot {
+    animation: none !important;
+    opacity: 0.6 !important;
+  }
+
+  .verb-swap,
+  .verb-swap-word {
+    transition: none !important;
+  }
+
+  .verb-swap-active,
+  .verb-swap[data-active="true"] .verb-swap-done {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  .message-enter {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  [data-setup-pulse],
+  .animate-ping {
+    animation: none !important;
+  }
+
+  .animate-shimmer,
+  .glow-pulse {
+    animation: none !important;
+  }
+
+  .stream-text-settle,
+  .stream-text-enter {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .paper-settle {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .reasoning-expand {
+    transition: none !important;
+  }
+
+  .reasoning-dot {
+    animation: none !important;
+    opacity: 0.6 !important;
+  }
+}
+
+/* Code block streaming — subtle left-border accent while content is
+   actively streaming into a fenced code block. */
+.prose pre:has(.streaming-cursor) {
+  border-left: 2px solid hsl(var(--primary) / 0.5);
+  transition: border-color 0.3s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════
+    Message Layout Animations
+    ═══════════════════════════════════════════════════════════ */
+
+/* Message enter animation — refined Claude-style arrival: a soft fade with
+   a barely-there rise (4px, not 8) so new content feels like it settles
+   into the page rather than sliding up into it. */
+@keyframes message-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(4px) scale(0.998);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.message-enter {
+  animation: message-enter 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Tool card enter — Claude-style roll-in for a new tool call ── */
+/* Plays ONCE on mount (stable keys keep the DOM node across streaming
+   updates, so flushes never replay it). */
+@keyframes tool-card-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tool-card-enter {
+  animation: tool-card-enter 0.25s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+}
+
+/* ── Tool expand — smooth reveal of the collapsible detail body ─── */
+.tool-expand-enter {
+  animation: tool-expand 0.22s ease-out;
+}
+
+@keyframes tool-expand {
+  from { opacity: 0.35; transform: translateY(-2px); }
+  to   { opacity: 1;   transform: translateY(0); }
+}
+
+/* ── Message virtualization — long histories skip off-screen rendering;
+   content-visibility keeps the scrollbar height correct via an estimated
+   intrinsic size, so a 200-message session stays scrollable without the
+   browser laying out every block. The tail (streaming / last messages) is
+   intentionally excluded. ── */
+.message-virtualized {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 96px;
+}
+
+/* ── Final summary — the closing text block of a tool-running turn.
+   Claude-style: no decoration, just breathing room. The extra top margin
+   separates "the work ended" from "here's the answer"; the text itself
+   renders as normal markdown. ── */
+.final-summary {
+  margin-top: 1rem;
+}
+
+/* ── Reasoning expand — smooth height animation for the thinking panel.
+   grid-template-rows 0fr→1fr animates height without measuring pixels; the
+   inner row clips its content (overflow hidden) so text never leaks during
+   the transition. ── */
+.reasoning-expand {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reasoning-expand-open {
+  grid-template-rows: 1fr;
+}
+
+.reasoning-expand-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* ── Text shimmer — the running tool's focal motion (bare row, no
+   container to animate, so the STATE WORD carries a light sweep —
+   applied to the verb only, never the target). ── */
+.text-shimmer {
+  background: linear-gradient(
+    100deg,
+    hsl(var(--foreground) / 0.72) 40%,
+    hsl(var(--primary)) 50%,
+    hsl(var(--foreground) / 0.72) 60%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: text-shimmer-sweep 2.2s linear infinite;
+}
+
+@keyframes text-shimmer-sweep {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ── Verb swap — Claude-desktop-style rolling verb transition. The active
+   and done state words share ONE inline-grid cell; on a swap the old word
+   rolls up out of view while the new one rolls in from below (odometer),
+   with a mid-roll blur, and the cell WIDTH transitions so a swap
+   (读取中→已读取) never jumps the row. The active word carries the text
+   shimmer while running. ── */
+.verb-swap {
+  display: inline-grid;
+  justify-items: start;
+  overflow: hidden;
+  transition: width 480ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.verb-swap-word {
+  grid-area: 1 / 1;
+  white-space: nowrap;
+  transition-property: opacity, transform, filter;
+  transition-duration: 300ms, 300ms, 300ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
+}
+
+/* Incoming word — sits below the visible cell, blurred, waiting to roll in. */
+.verb-swap-active {
+  opacity: 0;
+  transform: translateY(0.9em);
+  filter: blur(2px);
+}
+
+/* Outgoing word — at rest before it rolls up and away. */
+.verb-swap-done {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Running (active shown): active rolls in clean, done rolls up and out. */
+.verb-swap[data-active="true"] .verb-swap-active {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+.verb-swap[data-active="true"] .verb-swap-done {
+  opacity: 0;
+  transform: translateY(-0.9em);
+  filter: blur(2px);
+}
+
+/* ── Prose overrides for code blocks ───────────────────────── */
+/* Reset prose's pre/code background/padding so our custom
+   CodeBlock component controls the appearance. */
+.prose pre {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+.prose pre code {
+  background: transparent;
+  padding: 0;
+  font-weight: inherit;
+  border-radius: 0;
+  font-size: inherit;
+}
+/* Inline code — match our component override */
+.prose :not(pre) > code {
+  background: hsl(var(--muted));
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+.prose :not(pre) > code::before,
+.prose :not(pre) > code::after {
+  content: "";
+}
+
+/* ── Chat prose — tighten paragraph spacing ────────────────── */
+/* Assistant markdown inside the chat reads better with snug paragraph
+   gaps (prose defaults to a full line between <p> siblings). Scoped to
+   .chat-prose so depwork previews / settings keep the default rhythm. */
+.chat-prose .prose > p + p {
+  margin-top: 0.4em;
+}
+.chat-prose .prose > * + * {
+  margin-top: 0.4em;
+}
+.chat-prose .prose p {
+  margin-bottom: 0;
+}

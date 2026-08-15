@@ -1,0 +1,17 @@
+export const settingsCategories = {
+  appearance: "Appearance & Behavior",
+  models: "Models",
+  vision: "Vision model",
+  limits: "Execution Limits",
+  network: "Network & Data",
+  memory: "Memory",
+  permissions: "Permissions",
+  agents: "Agents",
+  skills: "Skills & Memory",
+  hooks: "Hooks",
+  mcpServers: "MCP servers",
+  connectors: "Connectors",
+  plugins: "Plugins",
+  usage: "Usage",
+  about: "About",
+};

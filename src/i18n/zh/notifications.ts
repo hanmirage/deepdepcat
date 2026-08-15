@@ -1,0 +1,15 @@
+export const notifications = {
+  title: "任务通知",
+  empty: "暂无任务通知",
+  completed: "后台任务已完成",
+  failed: "后台任务失败",
+  agentDone: "{{name}} · agent 完成",
+  agentFailed: "{{name}} · agent 失败",
+  noSummary: "无摘要",
+  viewSession: "点击查看所属会话",
+  max: "最近 {{count}} 条",
+  unread: "未读",
+  compaction: "上下文已压缩：节省 {{tokens}} tokens",
+  fileGenerated: "已生成 {{name}}（右侧「工作区」可查看）",
+  queuedWaiting: "已排队：上一个任务完成后将自动处理该消息。",
+};

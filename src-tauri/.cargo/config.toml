@@ -1,0 +1,24 @@
+# Fix 0xc0000139 (STATUS_ENTRYPOINT_NOT_FOUND) for cargo test binaries.
+#
+# Root cause: tauri-plugin-dialog → rfd imports `TaskDialogIndirect` from
+# comctl32.dll. That export only exists in Common Controls v6, which is only
+# activated when the process manifest declares a v6 dependency. The main app
+# gets a proper manifest from tauri_build, but cargo's test harness exe has
+# no manifest — so it loads the v5 comctl32 from System32 and dies at
+# startup with entry-point-not-found.
+#
+# This adds the v6 dependency to EVERY linked exe (tests included). The main
+# app already embeds its own RT_MANIFEST resource via tauri_build, and the
+# MSVC linker skips its generated manifest when a resource manifest exists —
+# so the app binary is unaffected.
+#
+# Syntax note: the value must NOT contain double quotes. rustc escapes `"`
+# to `\"` when building the linker command line, which breaks link.exe's
+# argument parsing (MSVCRT rules). With single-quoted XML attributes only,
+# rustc wraps the value (which contains spaces) in double quotes itself and
+# link.exe parses it as one argument.
+[target.x86_64-pc-windows-msvc]
+rustflags = [
+    "-C",
+    "link-arg=/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'",
+]

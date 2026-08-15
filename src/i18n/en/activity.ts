@@ -1,0 +1,15 @@
+export const activity = {
+  title: "Activity",
+  idle: "Idle",
+  active: "{{count}} running",
+  goal: "Goal",
+  backgroundSessions: "Background sessions",
+  backgroundTasks: "Background tasks",
+  noActivity: "No running subagents or background tasks",
+  jumpToSession: "Jump to session",
+  stopSession: "Stop background run",
+  untitledTask: "Untitled task",
+  done: "Done",
+  failed: "Failed",
+  killTask: "Kill task",
+};

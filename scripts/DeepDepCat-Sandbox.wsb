@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  DeepDepCat 发布测试沙盒 — 模拟"全新用户首次安装"环境。
+  用法:重启系统后,双击本文件即可打开 Windows Sandbox,
+  桌面上的 bundle 文件夹即最新的 NSIS 安装包(sb 里是只读映射,
+  打包后无需重新配置)。
+  每次关闭沙盒 = 环境完全销毁,下次打开又是全新 Windows。
+-->
+<Configuration>
+  <MappedFolders>
+    <MappedFolder>
+      <HostFolder>D:\Deep development\DeepDepCat\src-tauri\target\release\bundle\nsis</HostFolder>
+      <SandboxFolder>C:\Users\WDAGUtilityAccount\Desktop\bundle</SandboxFolder>
+      <ReadOnly>true</ReadOnly>
+    </MappedFolder>
+  </MappedFolders>
+  <ClipboardRedirection>true</ClipboardRedirection>
+  <MemoryInMB>3072</MemoryInMB>
+</Configuration>

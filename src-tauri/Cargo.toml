@@ -1,0 +1,136 @@
+[package]
+name = "deepdepcat"
+version = "1.2.1"
+description = "Unified AI Desktop Workbench"
+authors = ["DeepDepCat Team"]
+edition = "2021"
+license = "Apache-2.0"
+
+[lib]
+name = "deepdepcat_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+# Tauri core
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+tauri-plugin-fs = "2"
+tauri-plugin-updater = "2"
+tauri-plugin-single-instance = "2"
+tauri-plugin-notification = "2"
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_yaml = "0.9"
+toml = "0.8"
+
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+tokio-util = { version = "0.7", features = ["full"] }
+tokio-stream = "0.1"
+async-trait = "0.1"
+futures-util = "0.3"
+
+# HTTP client
+reqwest = { version = "0.12", features = ["json", "stream", "multipart", "rustls-tls"], default-features = false }
+
+# WebSocket client — CDP (Chrome DevTools Protocol) for browser takeover.
+# Requires rustls-tls (wss is unused — CDP speaks ws:// on 127.0.0.1).
+tokio-tungstenite = { version = "0.24", features = ["connect"] }
+
+# HTTP server (ACP — Agent Client Protocol)
+axum = "0.8"
+async-stream = "0.3"
+
+# Silent-update download with resume + signature verification (mirrors the
+# updater plugin's own minisign checks)
+base64 = "0.22"
+minisign-verify = "0.2"
+
+# Image decode/resize/re-encode for read_file multimodal support
+image = { version = "0.25", default-features = false, features = ["png", "jpeg", "gif", "webp", "bmp", "tiff", "ico"] }
+
+# Database
+rusqlite = { version = "0.32", features = ["bundled"] }
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Hash-based hook trust (SHA-256 content fingerprints)
+sha2 = "0.10"
+
+# Utilities
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1", features = ["v4", "serde"] }
+regex = "1"
+dirs = "5"
+sysinfo = "0.32"
+thiserror = "1"
+rand = "0.8"
+
+# OS keyring — website access token persistence (never localStorage)
+keyring = "3"
+
+# Misc
+open = "5"
+
+# Text & path utilities
+html2text = "0.14"
+urlencoding = "2"
+encoding_rs = "0.8"
+glob = "0.3"
+tempfile = "3"
+zip = { version = "2", features = ["deflate"] }
+csv = "1"
+lopdf = "0.44.0"
+
+# Platform-specific
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+# Windows UI automation (mouse/keyboard/window control) — reuses the
+# `windows` crate version already in the dependency tree via tauri.
+# JobObjects + Threading are for process-tree isolation (bash sandbox wiring).
+[target.'cfg(windows)'.dependencies]
+windows = { version = "0.61", features = [
+    "Win32_Foundation",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_UI_Input_KeyboardAndMouse",
+    "Win32_System_JobObjects",
+    "Win32_System_Threading",
+    "Win32_System_Diagnostics_Debug",
+    # EXCEPTION_POINTERS / SetUnhandledExceptionFilter are gated behind
+    # Win32_System_Kernel in the 0.61.x windows crate (API drift from older
+    # releases where they lived under Diagnostics_Debug alone).
+    "Win32_System_Kernel",
+    "Win32_Security",
+    # CryptProtectData/CryptUnprotectData (DPAPI) — MCP OAuth token at-rest
+    # encryption on Windows.
+    "Win32_Security_Cryptography",
+] }
+
+# ── Release profile ─────────────────────────────────────────────
+# Fat LTO + single codegen unit = maximum cross-crate inlining and
+# dead-code elimination. Combined with strip and panic=abort this
+# removes unwinding tables and debug symbols, roughly halving the
+# binary while improving cold-start latency.
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = "symbols"
+
+# ── Dev profile ─────────────────────────────────────────────
+# debug = 1 (line tables only, no full variable info) keeps incremental
+# caches and PDBs orders of magnitude smaller. Full debug info (debug=2)
+# ballooned target/debug to >100 GB of build caches over weeks of dev
+# builds (2026-08-12: 70 GB incremental + 32 GB stale deps). Line numbers
+# in backtraces still work; variable inspection in the debugger is limited.
+[profile.dev]
+debug = 1

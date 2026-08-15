@@ -1,0 +1,15 @@
+export const activity = {
+  title: "运行状态",
+  idle: "空闲",
+  active: "{{count}} 运行中",
+  goal: "目标",
+  backgroundSessions: "后台会话",
+  backgroundTasks: "后台任务",
+  noActivity: "暂无运行中的子智能体或后台任务",
+  jumpToSession: "跳转到该会话",
+  stopSession: "停止后台运行",
+  untitledTask: "未命名任务",
+  done: "已完成",
+  failed: "失败",
+  killTask: "终止任务",
+};

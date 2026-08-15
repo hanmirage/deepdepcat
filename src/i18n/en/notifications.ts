@@ -1,0 +1,15 @@
+export const notifications = {
+  title: "Task notifications",
+  empty: "No task notifications",
+  completed: "Background task completed",
+  failed: "Background task failed",
+  agentDone: "{{name}} · agent completed",
+  agentFailed: "{{name}} · agent failed",
+  noSummary: "No summary",
+  viewSession: "Click to view its session",
+  max: "Latest {{count}}",
+  unread: "Unread",
+  compaction: "Context compacted: saved {{tokens}} tokens",
+  fileGenerated: "Generated {{name}} (see Workspace on the right)",
+  queuedWaiting: "Queued: this message will be handled automatically when the current task finishes.",
+};

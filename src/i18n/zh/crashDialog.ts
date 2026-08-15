@@ -1,0 +1,16 @@
+export const crashDialog = {
+  title: "抱歉，DeepDepCat 遇到了意外崩溃",
+  privacy: "DeepDepCat 非常尊重您的隐私。您可以选择是否帮助我们发现并修复这个问题——以下内容都不会自动发送。",
+  optionErrorOnly: "仅发送报错代码",
+  optionErrorOnlyDesc: "发送崩溃信息（报错内容、系统环境）帮助我们定位问题。不包含您的对话内容。",
+  optionWithConversation: "携带 JSON 对话文件",
+  optionWithConversationDesc: "在报错代码基础上，额外附上本次对话内容（含工具调用），便于我们完整复现问题。仅在您选择时才会发送。",
+  notNow: "暂不发送",
+  send: "发送报告",
+  sending: "发送中…",
+  sent: "已发送，感谢您的反馈！",
+  sendError: "发送失败：",
+  noSessionToShare: "当前没有可导出的对话，已只发送报错代码",
+  restored: "已恢复上次会话。",
+  readFailed: "无法读取崩溃报告内容",
+};

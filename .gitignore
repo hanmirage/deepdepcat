@@ -1,0 +1,63 @@
+# Dependencies
+node_modules/
+target/
+dist/
+
+# Benchmark sandbox — fixtures live in bench/work-src; the per-run copy is
+# rebuilt by bench/run_bench.mjs and must never be tracked.
+bench/work/
+bench/depwork-work/
+bench/results/
+bench/*.log
+bench/*.err.log
+
+# Tauri signing private key 鈥?NEVER commit this
+.tauri/signing-key
+.tauri/signing-key.old-backup
+.tauri/signing-key.pub.old-backup
+.tauri/signing-key.pub
+
+# Python caches
+__pycache__/
+*.pyc
+
+# Credentials / internal docs 鈥?NEVER commit
+docs/SIGNING_KEYS.md
+scripts/ssh_cmd.py
+scripts/ssh_write.py
+scripts/ssh_write_stdin.py
+scripts/test_server.py
+server/.venv/
+server/.venv-test/
+server/.pytest_cache/
+server/deploy/*.js
+*.env
+.env
+.env.local
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build cache
+tsconfig.tsbuildinfo
+tsconfig.node.tsbuildinfo
+vite.config.js
+vite.config.d.ts
+
+# Temporary
+tmp_deploy/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local machine-specific tool configs
+.claude/settings.local.json
+*.local

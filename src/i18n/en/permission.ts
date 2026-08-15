@@ -1,0 +1,17 @@
+export const permission = {
+  title: "Confirmation required",
+  viewArgs: "View arguments",
+  collapseArgs: "Collapse arguments",
+  deny: "Deny",
+  alwaysAllow: "Always allow",
+  allow: "Allow",
+  sensitiveFile: "Modifying a sensitive file (keys/credentials) — review the changes before approving",
+  autoReviewDeniedTitle: "Auto-Review denied the action",
+  autoReviewAllowOnce: "Allow once anyway",
+  alwaysWillRemember: "'Always allow' will remember",
+  alwaysExact: "This scope only",
+  alwaysWholeTool: "Whole tool",
+  cancel: "Cancel",
+  denyReasonPlaceholder: "Why deny? (optional, sent back to the agent)",
+  confirmDeny: "Confirm deny",
+};

@@ -1,0 +1,7 @@
+{
+  "signingKeyPath": "D:\\Deep development\\DeepDepCat\\.tauri\\signing-key",
+  "signingKeyPassword": "PASTE_FROM_SIGNING_KEYS_MD",
+  "publishKey": "PASTE_DDC_PUBLISH_KEY",
+  "githubRepo": "hanmirage/deepdepcat",
+  "websiteDir": "D:\\Deep development\\DeeepdepcatWb"
+}

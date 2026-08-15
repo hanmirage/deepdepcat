@@ -1,0 +1,15 @@
+export const layout = {
+  codeMode: "DeepDepCat — Code",
+  depworkMode: "DeepDepCat — Depwork",
+  productCode: "Code",
+  productDepwork: "Depwork",
+  productCodeDesc: "Coding agent",
+  productDepworkDesc: "Document workspace",
+  productStreaming: "This product has a running session",
+  todoBadge: "Active todos in the current session",
+  saveConfig: "Save config",
+  saved: "Saved",
+  saving: "Saving…",
+  reset: "Reset",
+  settings: "Settings",
+};

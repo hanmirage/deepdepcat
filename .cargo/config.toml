@@ -1,0 +1,54 @@
+# Build configuration for release optimization.
+#
+# Combines per-target linker flags (this file) with [profile.release]
+# settings in src-tauri/Cargo.toml (LTO, codegen-units, strip, panic).
+# Together these roughly halve binary size and noticeably speed up startup.
+#
+# ── Windows (MSVC) ────────────────────────────────────────────
+#   8 MB stack (tokio + recursive async), large-address-aware for >4 GB.
+#
+# ── Linux (musl) ──────────────────────────────────────────────
+#   Fully static binary — no glibc runtime dependency.
+#   Note: Tauri's Linux GUI still needs dynamic WebKit2GTK; this target
+#   is primarily for headless / CI / CLI distribution binaries.
+#
+# ── macOS ──────────────────────────────────────────────────────
+#   dead_strip removes unused code sections at link time.
+
+[target.x86_64-pc-windows-msvc]
+rustflags = [
+    "-C", "link-arg=/STACK:8000000",
+    "-C", "link-arg=/LARGEADDRESSAWARE",
+]
+
+[target.x86_64-unknown-linux-musl]
+linker = "musl-gcc"
+rustflags = [
+    "-C", "target-feature=+crt-static",
+    "-C", "link-arg=-static",
+    "-C", "link-arg=-s",
+]
+
+[target.aarch64-unknown-linux-musl]
+linker = "aarch64-linux-musl-gcc"
+rustflags = [
+    "-C", "target-feature=+crt-static",
+    "-C", "link-arg=-static",
+    "-C", "link-arg=-s",
+]
+
+[target.x86_64-unknown-linux-gnu]
+rustflags = [
+    "-C", "link-arg=-Wl,--gc-sections",
+    "-C", "link-arg=-Wl,-s",
+]
+
+[target.x86_64-apple-darwin]
+rustflags = [
+    "-C", "link-arg=-Wl,-dead_strip",
+]
+
+[target.aarch64-apple-darwin]
+rustflags = [
+    "-C", "link-arg=-Wl,-dead_strip",
+]
